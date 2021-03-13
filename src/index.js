@@ -1,23 +1,21 @@
 function isOpeningBracket(bracket, map) {
-    return Object.values(map).includes(bracket);
+    return !!map[bracket];
 }
 
 function isClosingBracket(bracket, map) {
-    return !!map[bracket];
+    return Object.values(map).includes(bracket);
 }
 
 function isMatching(bracket, prevBracket, map) {
     if (typeof bracket === 'undefined' || typeof prevBracket === 'undefined')
         return false;
-    return map[bracket] === prevBracket;
+    return map[prevBracket] === bracket;
 }
 
 module.exports = function check(str, bracketsConfig) {
     const brackets = [];
     const bracketsMap = bracketsConfig.reduce((acc, value) => {
-        console.log(value);
-        acc[value[1]] = value[0];
-        console.log(acc);
+        acc[value[0]] = value[1];
         return acc;
     }, {});
 
